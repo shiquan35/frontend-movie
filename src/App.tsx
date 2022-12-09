@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import { Main } from "./pages/Main";
+import { IndivMovie } from "./pages/IndivMovie";
+import { MainPage } from "./pages/MainPage";
+import { NotFound } from "./pages/NotFound";
 
 function App() {
   return (
@@ -12,9 +13,10 @@ function App() {
           <Link to="/">Main Page</Link>
         </nav>
         <Routes>
-          <Route path="/" element={<Main />} />
-
-          {/* Nested Routes */}
+          <Route path="/" element={<MainPage />}>
+            <Route path=":movieName" element={<IndivMovie />}></Route>
+          </Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
     </>
