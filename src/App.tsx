@@ -10,10 +10,13 @@ function App() {
     <>
       <div className="App">
         <nav>
-          <Link to="/">Main Page</Link>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            Main Page
+          </Link>
         </nav>
         <Routes>
-          <Route path="/" element={<MainPage />}>
+          <Route path="/" element={<MainPage />}></Route>
+          <Route path="/movies">
             <Route path=":movieName" element={<IndivMovie />}></Route>
           </Route>
           <Route path="*" element={<NotFound />}></Route>
