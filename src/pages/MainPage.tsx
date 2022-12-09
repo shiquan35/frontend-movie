@@ -29,14 +29,14 @@ export function MainPage(props: IAppProps) {
 
   const displayMovies = movieList.map((movie, i) => {
     return (
-      <div className="movie" key={i + 1}>
-        <Link to={`/movies/${movie.name}`}>
+      <Link to={`/movies/${movie.name}`} style={{ textDecoration: "none" }}>
+        <div className="movie" key={i + 1}>
           <h2>{movie.name}</h2>
           <h3>{movie.productionYear}</h3>
           <h4>{movie.genre}</h4>
           <h5>{movie.synopsisShort}</h5>
-        </Link>
-      </div>
+        </div>
+      </Link>
     );
   });
 
