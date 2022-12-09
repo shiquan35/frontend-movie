@@ -1,5 +1,7 @@
 import * as React from "react";
 import axios from "axios";
+import { Link, Outlet } from "react-router-dom";
+import { IndivMovie } from "./IndivMovie";
 
 type MovieDetails = {
   name: string;
@@ -28,10 +30,12 @@ export function MainPage(props: IAppProps) {
   const displayMovies = movieList.map((movie, i) => {
     return (
       <div className="movie" key={i + 1}>
-        <h2>{movie.name}</h2>
-        <h3>{movie.productionYear}</h3>
-        <h4>{movie.genre}</h4>
-        <h5>{movie.synopsisShort}</h5>
+        <Link to={`/movies/${movie.name}`}>
+          <h2>{movie.name}</h2>
+          <h3>{movie.productionYear}</h3>
+          <h4>{movie.genre}</h4>
+          <h5>{movie.synopsisShort}</h5>
+        </Link>
       </div>
     );
   });

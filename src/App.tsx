@@ -13,7 +13,8 @@ function App() {
           <Link to="/">Main Page</Link>
         </nav>
         <Routes>
-          <Route path="/" element={<MainPage />}>
+          <Route path="/" element={<MainPage />}></Route>
+          <Route path="/movies">
             <Route path=":movieName" element={<IndivMovie />}></Route>
           </Route>
           <Route path="*" element={<NotFound />}></Route>
