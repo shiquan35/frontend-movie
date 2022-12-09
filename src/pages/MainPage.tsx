@@ -11,7 +11,7 @@ type MovieDetails = {
 
 export interface IAppProps {}
 
-export function Main(props: IAppProps) {
+export function MainPage(props: IAppProps) {
   const [movieList, setMovieList] = React.useState<MovieDetails[]>([]);
 
   console.log(movieList);
@@ -25,9 +25,20 @@ export function Main(props: IAppProps) {
       .catch((err) => console.log(err));
   }, []);
 
+  const displayMovies = movieList.map((movie, i) => {
+    return (
+      <div className="movie" key={i + 1}>
+        <h2>{movie.name}</h2>
+        <h3>{movie.productionYear}</h3>
+        <h4>{movie.genre}</h4>
+        <h5>{movie.synopsisShort}</h5>
+      </div>
+    );
+  });
+
   return (
     <>
-      <div>This is Main page</div>
+      <div className="displayContainer">{displayMovies}</div>
     </>
   );
 }
