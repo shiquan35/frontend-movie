@@ -11,17 +11,14 @@ type MovieDetails = {
   synopsis: string;
 };
 
-export interface IAppProps {}
-
-export function MainPage(props: IAppProps) {
+export function MainPage() {
   const [movieList, setMovieList] = React.useState<MovieDetails[]>([]);
 
   const [searchGenre, setSearchGenre] = React.useState<string>("");
 
   const [searchYear, setSearchYear] = React.useState<string>("");
 
-  console.log(movieList);
-
+  // API call
   React.useEffect(() => {
     axios
       .get(
@@ -31,6 +28,7 @@ export function MainPage(props: IAppProps) {
       .catch((err) => console.log(err));
   }, []);
 
+  // filter based on genre and year
   const displayMovies = movieList
     .filter((movie) => {
       if (searchGenre === "" && searchYear === "") {
