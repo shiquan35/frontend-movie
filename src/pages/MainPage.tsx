@@ -16,6 +16,10 @@ export interface IAppProps {}
 export function MainPage(props: IAppProps) {
   const [movieList, setMovieList] = React.useState<MovieDetails[]>([]);
 
+  const [searchGenre, setSearchGenre] = React.useState<string>("");
+
+  const [searchYear, setSearchYear] = React.useState<string>("");
+
   console.log(movieList);
 
   React.useEffect(() => {
@@ -27,21 +31,52 @@ export function MainPage(props: IAppProps) {
       .catch((err) => console.log(err));
   }, []);
 
-  const displayMovies = movieList.map((movie, i) => {
-    return (
-      <Link to={`/movies/${movie.name}`} style={{ textDecoration: "none" }}>
-        <div className="movie" key={i + 1}>
-          <h2>{movie.name}</h2>
-          <h3>{movie.productionYear}</h3>
-          <h4>{movie.genre}</h4>
-          <h5>{movie.synopsisShort}</h5>
-        </div>
-      </Link>
-    );
-  });
+  const displayMovies = movieList
+    .filter((movie) => {
+      if (searchGenre === "" && searchYear === "") {
+        return movie;
+      } else if (
+        movie.genre.toLowerCase().includes(searchGenre.toLowerCase()) &&
+        movie.productionYear.toString().includes(searchYear)
+      ) {
+        return movie;
+      }
+    })
+    .map((movie, i) => {
+      return (
+        <Link to={`/movies/${movie.name}`} style={{ textDecoration: "none" }}>
+          <div className="movie" key={i + 1}>
+            <h2>{movie.name}</h2>
+            <h3>{movie.productionYear}</h3>
+            <h4>{movie.genre}</h4>
+            <h5>{movie.synopsisShort}</h5>
+          </div>
+        </Link>
+      );
+    });
 
   return (
     <>
+      <br />
+      Filter by
+      <br />
+      Genre:{" "}
+      <input
+        type="text"
+        placeholder="Genre"
+        onChange={(event) => {
+          setSearchGenre(event.target.value);
+        }}
+      />
+      <br />
+      Year:{" "}
+      <input
+        type="number"
+        placeholder="Year"
+        onChange={(event) => {
+          setSearchYear(event.target.value);
+        }}
+      />
       <div className="displayContainer">{displayMovies}</div>
     </>
   );
