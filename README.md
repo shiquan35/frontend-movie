@@ -1,5 +1,3 @@
-# bluejay-frontend-movie-assignment
-
 ## To start the app:
 
 Run `npm i` <br />
